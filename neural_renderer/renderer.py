@@ -154,7 +154,7 @@ class Renderer(nn.Module):
 
         # rasterization
         faces = nr.vertices_to_faces(vertices, faces)
-        images = nr.rasterize(
+        out = nr.rasterize_rgbad(
             faces, textures, self.image_size, self.anti_aliasing, self.near, self.far, self.rasterizer_eps,
             self.background_color)
-        return images
+        return out['rgb'], out['depth'], out['alpha']
